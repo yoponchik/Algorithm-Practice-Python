@@ -240,12 +240,13 @@ class BinarySearch:
 
         return -1
 
+    #Instead of writing all the code in the LocateCard, we can make a new function to just tell it to go left, right, or that we found it
     def TestLocation(cards, query, midIndex):
         midNumber = cards[midIndex]
         print('mid: ', midIndex, 'midNumber', midNumber)
         if(query == midNumber):     #2 conditions to check if they are equal: Are there multiple numbers equal to the query? If yet, go left to get the first one. If not, we found it
             if((cards[midIndex - 1] == query) and ((midIndex - 1) >= 0)):              #if the INDEX left of the mid has an element equal to query and it is greater or equal to 0 (to prevent from going out of INDEX)
-                return 'left'
+                return 'left'                                                       #we dont need to find the one on the right, because we want the first index
             else: 
                 return 'found'
         elif(query < midNumber): #if the query is less than the midNumber, go left
@@ -253,7 +254,6 @@ class BinarySearch:
         else:                       #if the query is greater than the midNumber, go right
             return 'right'
         
-
 
 
     def TestFunction(tests):
