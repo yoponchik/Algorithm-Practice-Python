@@ -158,7 +158,7 @@ Search.TestFunction(tests)
  """
 
 
-#Binary Search
+#Binary Search  - Assuming we have a SORTED LIST
 #Step 2-1: List Cases
 tests = []
 #initial test case
@@ -172,7 +172,7 @@ tests.append({"input": { "cards": [0,5,8,9,10,16], "query": 16}, 'output': 5})
 #only one element
 tests.append({"input": { "cards": [6], "query": 6}, 'output': 0})
 #repeated number in the cards
-tests.append({"input": { "cards": [4, 5, 5, 5, 12], "query": 5}, 'output': 1})
+tests.append({"input": { "cards": [4, 5, 5, 5, 6, 6, 12], "query": 5}, 'output': 1})
 #no query in cards
 tests.append({"input": { "cards": [1,2,3,4,5,6,7,8], "query": 9}, 'output': -1})
 #empty cards
@@ -182,7 +182,7 @@ tests.append({"input": { "cards": [], "query": 5}, 'output': -1})
 
 #Step 2-2: Implement Algorithm
 
-class BinarySearch:
+""" class BinarySearch:
     def LocateCard(cards, query):
         head = 0                    #at the first index
         end = (len(cards) - 1)      #at the last index
@@ -218,5 +218,58 @@ class BinarySearch:
                 print("----------------")
 
 
-BinarySearch.TestFunction(tests)
+BinarySearch.TestFunction(tests)                                        #test #6 will probably fail, because there are multiple numbers that match the query
+ """
 
+#Step2-3: Debug - Because we have a SORTED list, we just have to check the adjacent indices to decide whether to go down or up
+class BinarySearch:
+    def LocateCard(cards, query):
+        head = 0                    
+        end = (len(cards) - 1)      
+
+        while(head <= end):         
+            midIndex = (head + end) // 2     
+            result = BinarySearch.TestLocation(cards, query, midIndex)
+
+            if(result == 'found'):
+                return midIndex                 
+            elif(result == 'left'):        
+                end = midIndex - 1
+            elif(result == 'right'):
+                head = midIndex + 1
+
+        return -1
+
+    def TestLocation(cards, query, midIndex):
+        midNumber = cards[midIndex]
+        print('mid: ', midIndex, 'midNumber', midNumber)
+        if(query == midNumber):     #2 conditions to check if they are equal: Are there multiple numbers equal to the query? If yet, go left to get the first one. If not, we found it
+            if((cards[midIndex - 1] == query) and ((midIndex - 1) >= 0)):              #if the INDEX left of the mid has an element equal to query and it is greater or equal to 0 (to prevent from going out of INDEX)
+                return 'left'
+            else: 
+                return 'found'
+        elif(query < midNumber): #if the query is less than the midNumber, go left
+            return 'left'
+        else:                       #if the query is greater than the midNumber, go right
+            return 'right'
+        
+
+
+
+    def TestFunction(tests):
+        number = 0
+        for test in tests:
+            number += 1
+            print("Test Number ", number)
+            print("Function Output", BinarySearch.LocateCard(**test['input']))
+            print("Correct Output", test['output'])
+            if(test['output'] == BinarySearch.LocateCard(**test['input'])):
+                print("PASS")
+                print("----------------")
+
+            else:
+                print("FAIL")
+                print("----------------")
+
+
+BinarySearch.TestFunction(tests)
