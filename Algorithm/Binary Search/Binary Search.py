@@ -190,16 +190,16 @@ class BinarySearch:
         print("Cards: ", cards, "Query: ", query)
 
         while(head <= end):         #if the head is greater than the end, then that means we searched through the whole array; they passed each other
-            mid = (head + end) // 2     #floor division: rounds result to nearest integer; because we int for array elements
-            midNumber = cards[mid]
-            print("head: ", head, " end: ", end, " mid: ", mid, " mid_number: ", midNumber)
+            midIndex = (head + end) // 2     #floor division: rounds result to nearest integer; because we int for array elements
+            midNumber = cards[midIndex]
+            print("head: ", cards[head], " end: ", cards[end], " mid_number: ", midNumber)
 
             if(query == midNumber):
-                return midNumber
+                return midIndex                  #printing the mid, not the element in the index
             elif(query < midNumber):        #If number on the right side: move the end to right before the mid
-                end = mid - 1
+                end = midIndex - 1
             elif(query > midNumber):
-                head = mid + 1
+                head = midIndex + 1
         return -1
 
     def TestFunction(tests):
