@@ -1,0 +1,30 @@
+1:  State the problem clearly. Identify the inputs and the outputs
+Given a rotated list that was previously sorted, we need to find the MINIMUM number of times it was rotated
+The input would be an array of numbers e.g. num: [7,9,3,5,6]
+Output would be the number of times the sorted list was rotated e.g. 2
+
+
+2: Create the function
+
+3: Make different cases
+
+4: Create Test Case Checker
+
+5: Algorithm
+
+-If we look closely, we can see that if a list of sorted numbers is rotated n times,
+then the smallest number in the list ends up at position k (counting from 0).
+Furthermore, it is the only number in the list that is smaller than the numbers before it
+
+-Therefore,  
+	-we need to check for each number in the list whether it is smaller than the number that comes before it
+	-then the number of rotations (answer) is the index of the number
+	-if no number greater than the smallest number is in front of it, it wasn't rotated
+
+E.g. [19,25,29,3,5,6,7,9,11,14]
+-number 3 is the smallest number which is at index 3
+
+Can use linear search as the first attempt to solve it
+
+6: Describe
+	a. create a v
