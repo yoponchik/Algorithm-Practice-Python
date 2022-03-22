@@ -26,19 +26,24 @@ print(result0, result0 == output0)    #should be None False, because right now w
  """
 #4: Create Test Case Checker
 """ class BinarySearchPractice:
-    def checkResult(tests, nums):
-        output = tests['output']
-        if(output == BinarySearchPractice.countRotations(nums)):
-            print("PASS")
-        else: 
-            print("FAIL")
+    def checkResult(tests):
+        testNumber = 1
+        for test in tests:
+            input = tests['input']['nums']
+            output = tests['output']
+            print("Test", testNumber)
+            if(output == BinarySearchPractice.countRotations(input)):
+                print("PASS")
+            else: 
+                print("FAIL")
+            testNumber += 1
 
 
     def countRotations(nums):
         pass 
     
 
-BinarySearchPractice.checkResult(test0, nums0) #should say FAIL """
+BinarySearchPractice.checkResult(test) #should say FAIL """
 
 #5 Add more test cases
 tests = []
@@ -58,5 +63,78 @@ tests.append({'input': {'nums': [3,5,7,8,9,10]}, 'output': 0})
 tests.append({'input': {'nums': []}, 'output': 0})
 #list containing just one element 
 tests.append({'input': {'nums': [1]}, 'output': 0})
+
 """ 
 BinarySearchPractice.checkResult(test0, nums0)  #should say FAIL """
+
+
+#6 Apply Brute Force Algorithm
+#pattern: Since it was previously a SORTED array, rotating the array makes it so that the number
+#of the index of the smallest number gives the number of times the array was rotated
+
+""" class BinarySearchPractice:
+    def countRotations(nums):
+        position = 0                       #Initial position
+
+        while position < len(nums):              #When should the loop be terminated
+            #Check if the number at the current position is smaller than its predecessor
+            if position > 0 and nums[position] < nums[position - 1]:             #if we are at position greater than 0 AND #number in current position is smaller than the one before it                                                                            
+                return position                  #position gives the number of rotations
+            
+            position += 1          #add 1 to position             # FYI: if nums[0] then skips to position = 1
+        return 0                    #what if no positions passed the check
+            
+    def checkResult(tests):
+
+        testNumber = 0
+
+        for test in tests:
+            input = test['input']['nums']
+            output = test['output']
+    
+            print("Test", testNumber)
+            if(output == BinarySearchPractice.countRotations(input)):
+                print("PASS")
+            else: 
+                print("FAIL")
+            
+            testNumber += 1
+
+BinarySearchPractice.checkResult(tests) """
+
+
+#7 Optimize Code
+class BinarySearchPractice:
+    def countRotations(nums):
+        head = 0                                    #assign a variable for the head of the array
+        tail = len(nums) - 1                        #assign a variable for the tail of the array
+
+        while head < tail:                              #when should the loop be terminated?
+            mid = (head + tail) //2                     # we use // to make it into integer
+            midNumber = nums[mid]
+
+            #if the mid has the answer
+            if(mid > 0 and midNumber == min(nums)):                       #we don't do mid > head, because head can be updated
+                return mid
+            #if the answer is in the left half; mid < tail
+            elif(mid < tail):       
+                tail = mid - 1                        #we don't need to return hi or lo, because
+            #if the answer is in the right half; mid > tail
+            else:                       
+                head = mid + 1
+        return 0                    #what if no positions passed the check
+            
+    def checkResult(tests):
+
+        testNumber = 0
+        for test in tests:
+            input = test['input']['nums']
+            output = test['output']
+            print("\nTest", testNumber)
+            if(output == BinarySearchPractice.countRotations(input)):
+                print("PASS")
+            else: 
+                print("FAIL")
+            testNumber += 1
+
+BinarySearchPractice.checkResult(tests)
