@@ -108,19 +108,25 @@ class BinarySearchPractice:
     def countRotations(nums):
         head = 0                                    #assign a variable for the head of the array
         tail = len(nums) - 1                        #assign a variable for the tail of the array
-
-        while head < tail:                              #when should the loop be terminated?
+        
+        #when should the loop be terminated?
+        while (head <= tail):                       #note that it has to be <= not <; otherwise, when we only have 2 numbers to compare, it will terminate and you will get 0                    
             mid = (head + tail) //2                     # we use // to make it into integer
             midNumber = nums[mid]
 
+            print("head", head, "tail", tail, "mid", mid, "midNumber", midNumber)
+
             #if the mid has the answer
-            if(mid > 0 and midNumber == min(nums)):                       #we don't do mid > head, because head can be updated
+            """ if(mid > 0 and midNumber == min(nums)): """                       #we don't do mid > head, because head can be updated
+            if(mid > 0 and nums[mid - 1] > midNumber):
                 return mid
             #if the answer is in the left half; mid < tail
-            elif(mid < tail):       
+            elif(midNumber < nums[tail]):
+                print("left")       
                 tail = mid - 1                        #we don't need to return hi or lo, because
             #if the answer is in the right half; mid > tail
             else:                       
+                print("right")       
                 head = mid + 1
         return 0                    #what if no positions passed the check
             
@@ -131,6 +137,7 @@ class BinarySearchPractice:
             input = test['input']['nums']
             output = test['output']
             print("\nTest", testNumber)
+            print(test)
             if(output == BinarySearchPractice.countRotations(input)):
                 print("PASS")
             else: 
