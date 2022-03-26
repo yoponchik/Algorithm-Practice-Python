@@ -92,7 +92,7 @@ print(user3) """
 
 
 #Instantiate Sample Users
-josh = BinarySearchTree.User("josh", "Josh Bartkoske", "josh@bartkoske.com")
+""" josh = BinarySearchTree.User("josh", "Josh Bartkoske", "josh@bartkoske.com")
 jake = BinarySearchTree.User("jake", "Jake Dibble", "jake@dibble.com")
 joe = BinarySearchTree.User("joe", "Joe White", "joe@white.com")
 james = BinarySearchTree.User("james", "James Gilbert", "james@gilbert.com")
@@ -104,10 +104,10 @@ noah = BinarySearchTree.User("noah", "Noah Palm", "noah@palm.com")
 jonny = BinarySearchTree.User("jonny", "Jonny Sieberhagen", "jonny@sieberhagen.com")
 david = BinarySearchTree.User("david", "David Kim", "david@kim.com")
 austin = BinarySearchTree.User("austin", "Austin Davis", "austin@davis.com")
-simeon = BinarySearchTree.User("simeon", "Simeon Blanc", "simeon@blanc.com")
+simeon = BinarySearchTree.User("simeon", "Simeon Blanc", "simeon@blanc.com") """
 
 #store users in array
-users = [josh, jake, joe, james, daniely, paul, danielk, alec, noah, jonny, david, austin, simeon]
+""" users = [josh, jake, joe, james, daniely, paul, danielk, alec, noah, jonny, david, austin, simeon] """
 
 
 #06. Algorithm
@@ -120,7 +120,7 @@ users = [josh, jake, joe, james, daniely, paul, danielk, alec, noah, jonny, davi
 
 """ print("ab" < "ac") """  #should be true, because in alphabetical order, ab is "less"
 
-class BinarySearchTree:
+""" class BinarySearchTree:
     class User:
         def __init__(self, username, name, email):   #Constructor
             self.username = username
@@ -140,21 +140,74 @@ class BinarySearchTree:
         
         def Insert(self, user):
             i = 0
-            while i < len(self.users):
+            while i < len(self.users):              #from index 0 to the end
                 #find the first username in ARRAY USERS greater than the new user's username
-                if(self.users[i].username  > user.username):
-                    break                   #if you do find it; break out of while loop and insert user at position
-                i +=1                       #go to next index
-            self.users.Insert(i, user)      #
+                if(self.users[i].username  > user.username):            #want username that comes right after the queried username
+                    break                   #if you do find it; break out of while loop 
+                i += 1                       #go to next index
+            self.users.insert(i, user)      #Insert user at that position (Not a recursive call)
+                                            # .insert(i,user) is the in-built insert() method of the list defined inside the init method.
 
         def Find(self, username):
-            for user in self.users:
-                if(user.username == username):
-                    return user
+            for user in self.users:             #in the list of users
+                if(user.username == username):  #if the usernames match
+                    return user                 #return it
        
-        def Update(self, user):
-            target = self.Find(user.username)
-            target.name, target.email = user.name, user.email
+        def Update(self, user): 
+            target = self.Find(user.username)   #Find the User
+            target.name, target.email = user.name, user.email       #Update the info
        
         def ListAll(self):
-            return self.users               #return the whole array
+            print(self.users)                #return the whole array
+
+
+#Instantiate Users
+john = BinarySearchTree.User("john", "John Doe", "John@doe.com")
+josh = BinarySearchTree.User("josh", "Josh Bartkoske", "josh@bartkoske.com")
+jake = BinarySearchTree.User("jake", "Jake Dibble", "jake@dibble.com")
+joe = BinarySearchTree.User("joe", "Joe White", "joe@white.com")
+james = BinarySearchTree.User("james", "James Gilbert", "james@gilbert.com")
+daniely = BinarySearchTree.User("daniey", "Daniel Yilmaz", "daniel@yilmaz.com")
+paul = BinarySearchTree.User("paul", "Paul Oh", "paul@oh.com")
+danielk = BinarySearchTree.User("danielk", "Daniel Kim", "daniel@kim.com")
+alec = BinarySearchTree.User("alec", "Alec Savig", "alec@savig.com")
+noah = BinarySearchTree.User("noah", "Noah Palm", "noah@palm.com")
+jonny = BinarySearchTree.User("jonny", "Jonny Sieberhagen", "jonny@sieberhagen.com")
+david = BinarySearchTree.User("david", "David Kim", "david@kim.com")
+austin = BinarySearchTree.User("austin", "Austin Davis", "austin@davis.com")
+simeon = BinarySearchTree.User("simeon", "Simeon Blanc", "simeon@blanc.com") 
+
+#Put into array
+users = [john, josh, jake, joe, james, daniely, paul, danielk, alec, noah, jonny, david, austin, simeon]
+
+#Instantiate Database
+database = BinarySearchTree.UserDatabase()
+
+#Insert entries in the object
+database.Insert(joe)
+database.Insert(jake)
+database.Insert(danielk)
+database.Insert(john)
+
+#Retrieve Data given username
+user = database.Find("joe")
+print(user)
+
+#Update user entries (won't work if you don't insert into database)
+database.Update(BinarySearchTree.User(username="john", name='John Dough', email='john@dough.com'))
+                                #we can just write User(details), because we have the init constructor method
+
+
+user1 = database.Find("john") 
+print(user1)
+
+
+#List all the entries; Note that the list is in alphabetical order, because of the Insert Method
+
+#Check with another user
+database.ListAll()
+database.Insert(paul)
+database.ListAll()          #Check if Paul is inserted correctly; Note that paul is in the end of the list
+ """
+
+ 
