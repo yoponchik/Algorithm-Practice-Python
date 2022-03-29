@@ -1,1 +1,35 @@
-1. 
+#01. Create an empty program
+
+#02. Determine the input and the output
+
+#03. Brute Force Algorithm
+	a. Create constructors
+		-def __init__(self, username, name, email):  
+			-called everytime an object is created
+			-let's the class initialize the object's attributes
+		-def __repr__(self):
+			-represents the class' objects as strings
+			-"official" string representation
+		-def __str__(self):
+			-"informal" string representation
+	b. Create classes
+		-User class: has init, repr, str method	
+		-Database class: self, insert, find, update, listall
+	
+	c. Create methods
+		-Insert: Loop thru the user list and add new user by sorting it
+		-Find: Loop thru the list and find the user object with the username that matches the query
+		-Update: Loop thru list, find the user object that matches the query and update the details
+		-Listall: Return the list of user objects
+		
+		-Use <, >, = operators to compare the strings, and checking alphabetical order
+
+	d. Initialize the users
+		-Instantiate the users using the constructors
+		-add constructed users into database using the Insert method	
+		-Find, update, and listall
+
+#04. Optimize the Algorithm
+-use the binary tree structure, instead of a linear list
+-Each node of the tree stores (1). a key: username and (2). a value: user object
+
