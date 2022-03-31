@@ -33,3 +33,30 @@
 -use the binary tree structure, instead of a linear list
 -Each node of the tree stores (1). a key: username and (2). a value: user object
 
+#10 Traversing a Binary Tree (https://techvidvan.com/tutorials/tree-traversal-in-data-structure/)
+-3 types of tree traversal: inorder, preorder, postorder
+
+	1. Inorder Traversal: Defined Recursively (b/c binary trees have a recursive structure)
+		a. Traverse the left subtree recursively in order. 
+			-Go to the leftmost subtree, temporarily skipping all the parent nodes
+			-After reaching the leftmost leaf, can look (print/add to list/etc) at the parent subtree
+			-Then go the right leaf and keep going down
+		b. Traverse the current node.
+			-After reaching all the left subtrees, go back and look at the root node
+		c. Traverse the right subtree recursively in order
+			-Start traversing the right subtrees in the same fashion
+		
+		Summary: Skips through nodes, until reaches bottom, then "looks at node" as you go up
+
+	2. Preorder Traversal: 
+		a. Traverse the current node.
+			-print/add to list/etc
+		b. Traverse the left subtree recursively
+		c. Traverse the right subtree recursively
+
+		Summary: "Looks at each node" as you go down
+
+	3. Postorder Traversal:
+		a. Traverse the left subtree recursively
+		b. Traverse the right subtree recursively
+		d. "Look at the root node"
